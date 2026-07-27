@@ -1,0 +1,6 @@
+.bash_history
+.gemini/
+.cloudshell/
+.ssh/
+node_modules/
+.firebase/

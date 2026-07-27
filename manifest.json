@@ -1,0 +1,41 @@
+{
+    "name": "Zee Links - Technology Security Solutions",
+    "short_name": "ZeeLinks",
+    "description": "Professional CCTV, networking and IT solutions by Zee Links.",
+    
+    "start_url": "./index.html",
+
+    "display": "standalone",
+
+    "background_color": "#0b1120",
+
+    "theme_color": "#2563eb",
+
+    "orientation": "portrait",
+
+    "icons": [
+
+        {
+            "src": "assets/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+
+        {
+            "src": "assets/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+
+    ],
+
+    "categories": [
+        "utilities",
+        "video",
+        "productivity"
+    ],
+
+    "lang": "en",
+
+    "dir": "ltr"
+}
