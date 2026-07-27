@@ -2,7 +2,7 @@
 
 A modern Progressive Web Application (PWA) built with HTML5, CSS3, and JavaScript.
 
----
+----
 
 ## 🚀 About Project
 
