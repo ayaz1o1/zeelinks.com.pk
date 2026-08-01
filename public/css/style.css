@@ -2254,3 +2254,113 @@ ul{
 .logo img{width:58px;height:58px;object-fit:contain}
 .footer-links{display:flex;gap:18px;flex-wrap:wrap}
 @media(max-width:768px){.logo-text span{display:none}.header .container{gap:10px}.header-actions .social-btn{display:none}}
+/*==================================================
+  MOBILE MENU FIX ONLY
+==================================================*/
+
+.mobile-toggle{
+
+    display:none;
+
+}
+
+
+/* Mobile View */
+
+@media(max-width:768px){
+
+
+    .mobile-toggle{
+
+        display:block;
+
+        border:none;
+
+        background:none;
+
+        font-size:28px;
+
+        cursor:pointer;
+
+        color:#0f172a;
+
+    }
+
+
+    .navbar{
+
+        position:absolute;
+
+        top:82px;
+
+        left:0;
+
+        width:100%;
+
+        background:#ffffff;
+
+        box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+        display:none;
+
+    }
+
+
+    .navbar.active{
+
+        display:block;
+
+    }
+
+
+    .navbar ul{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        padding:25px;
+
+    }
+
+
+    .navbar a{
+
+        display:block;
+
+        width:100%;
+
+    }
+
+}
+
+
+/* Small Phones */
+
+@media(max-width:576px){
+
+
+    .header .container{
+
+        min-height:70px;
+
+    }
+
+
+    .logo img{
+
+        width:45px;
+
+        height:45px;
+
+    }
+
+
+    .logo-text h2{
+
+        font-size:20px;
+
+    }
+
+
+}
