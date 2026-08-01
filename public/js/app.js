@@ -165,3 +165,22 @@ document.querySelectorAll(".current-year").forEach(el => {
 });
 
 console.log("%cZee Links Enterprise Platform", "color:#2563eb;font-size:20px;font-weight:bold;");
+
+document.addEventListener("click", function(event){
+
+    const navbar = document.querySelector(".navbar");
+    const menuBtn = document.querySelector(".mobile-toggle");
+
+    if(!navbar || !menuBtn) return;
+
+
+    if(
+        !navbar.contains(event.target) &&
+        !menuBtn.contains(event.target)
+    ){
+
+        navbar.classList.remove("active");
+
+    }
+
+});
