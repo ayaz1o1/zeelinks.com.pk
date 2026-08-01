@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZeeLinks Portal | Fast Video Downloader</title>
+
+    <meta name="description"
+        content="Analyze video URLs with Zee Links. Platform-specific extraction requires a server-side service.">
+
+    <meta name="keywords"
+        content="Video Downloader, YouTube Downloader, Facebook Downloader, TikTok Downloader, Zee Links">
+
+    <meta name="author" content="Zee Links">
+
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ZeeLinks Portal">
+    <meta property="og:description"
+        content="Analyze video URLs quickly and securely. Direct media downloads are supported in the browser.">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="../../assets/logo/favicon.png">
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="downloader.css">
+<meta name="robots" content="index, follow">
+</head>
+
+<body>
+
+<!-- Loading Screen -->
+
+<div id="loader">
+
+    <div class="loader-logo">
+
+        <img src="../../assets/logo/logo.png" alt="Zee Links">
+
+    </div>
+
+    <div class="loader-ring"></div>
+
+    <h2>ZeeLinks Portal</h2>
+
+</div>
+
+<!-- Animated Background -->
+
+<div class="bg-animation">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+<!-- Navigation -->
+
+<header>
+
+<nav class="navbar">
+
+<a class="logo" href="https://zeelinks.com.pk/" aria-label="Go to Zee Links main website"><img src="../../assets/logo/logo.png" alt="Logo"><h2>ZeeLinks</h2></a>
+
+<ul class="nav-links">
+
+<li><a href="https://zeelinks.com.pk/">Home</a></li>
+
+<li><a href="#download">Download</a></li>
+
+<li><a href="#features">Features</a></li>
+
+<li><a href="#faq">FAQ</a></li>
+
+<li><a href="https://zeelinks.com.pk/#contact">Contact</a></li>
+
+</ul>
+
+<div class="nav-actions">
+
+<button id="themeToggle">
+
+<i class="fa-solid fa-moon"></i>
+
+</button>
+
+<button id="menuBtn">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+Download Videos From
+
+<span>Supported Platforms</span>
+
+</h1>
+
+<p>
+
+Paste a video URL to analyze it. Direct media files can be opened in your browser; supported platform downloads require the Zee Links server-side downloader.
+
+</p>
+
+<div class="download-box">
+
+<input
+type="url"
+placeholder="Paste video URL here...">
+
+<button>
+
+<i class="fa-solid fa-download"></i>
+
+Download
+
+</button>
+
+</div>
+
+<div class="supported-icons">
+
+<span><i class="fab fa-youtube"></i> YouTube</span>
+
+<span><i class="fab fa-facebook"></i> Facebook</span>
+
+<span><i class="fab fa-instagram"></i> Instagram</span>
+
+<span><i class="fab fa-tiktok"></i> TikTok</span>
+
+<span><i class="fab fa-x-twitter"></i> X</span>
+
+<span><i class="fab fa-vimeo"></i> Vimeo</span>
+
+</div>
+
+</div>
+
+<div class="hero-image">
+
+<img src="../../assets/images/about/about-main.svg" alt="Hero">
+
+</div>
+
+</section>
+<!-- =========================
+     DOWNLOAD SECTION
+========================== -->
+
+<section id="download" class="download-section">
+
+    <div class="section-title">
+
+        <h2>Analyze & Download Videos</h2>
+
+        <p>
+            Paste one URL below. Direct media links can open immediately; platform links are sent to the configured Zee Links downloader API.
+        </p>
+
+    </div>
+
+    <div class="download-card">
+
+        <div class="input-group">
+
+            <input
+                type="url"
+                id="videoURL"
+                placeholder="https://example.com/video">
+
+            <button id="analyzeBtn">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Analyze
+
+            </button>
+
+        </div>
+
+        <div id="downloadResult">
+
+            <!-- JavaScript will generate download options here -->
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     SUPPORTED PLATFORMS
+========================== -->
+
+<section class="platforms">
+
+<div class="section-title">
+
+<h2>Supported Platforms</h2>
+
+<p>Download videos from the world's most popular websites.</p>
+
+</div>
+
+<div class="platform-grid">
+
+<div class="platform-card">
+
+<i class="fab fa-youtube"></i>
+
+<h3>YouTube</h3>
+
+<p>Videos, Shorts & Playlists</p>
+
+</div>
+
+<div class="platform-card">
+
+<i class="fab fa-facebook"></i>
+
+<h3>Facebook</h3>
+
+<p>Videos & Reels</p>
+
+</div>
+
+<div class="platform-card">
+
+<i class="fab fa-instagram"></i>
+
+<h3>Instagram</h3>
+
+<p>Posts, Reels & Stories</p>
+
+</div>
+
+<div class="platform-card">
+
+<i class="fab fa-tiktok"></i>
+
+<h3>TikTok</h3>
+
+<p>URL analysis; extraction needs backend</p>
+
+</div>
+
+<div class="platform-card">
+
+<i class="fab fa-x-twitter"></i>
+
+<h3>X</h3>
+
+<p>URL analysis; extraction needs backend</p>
+
+</div>
+
+<div class="platform-card">
+
+<i class="fab fa-vimeo"></i>
+
+<h3>Vimeo</h3>
+
+<p>Direct media where accessible</p>
+
+</div>
+
+<div class="platform-card">
+
+<i class="fab fa-pinterest"></i>
+
+<h3>Pinterest</h3>
+
+<p>Pins & Videos</p>
+
+</div>
+
+<div class="platform-card">
+
+<i class="fab fa-linkedin"></i>
+
+<h3>LinkedIn</h3>
+
+<p>URL analysis; extraction needs backend</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     WEBSITE STATS
+========================== -->
+
+<section class="stats">
+
+<div class="stat-box">
+
+<h2>Direct</h2>
+
+<p>Media URLs</p>
+
+</div>
+
+<div class="stat-box">
+
+<h2>8+</h2>
+
+<p>Tool Categories</p>
+
+</div>
+
+<div class="stat-box">
+
+<h2>24/7</h2>
+
+<p>Web Access</p>
+
+</div>
+
+<div class="stat-box">
+
+<h2>Free</h2>
+
+<p>Browser Tool</p>
+
+</div>
+
+</section>
+
+<!-- =========================
+     FEATURES
+========================== -->
+
+<section id="features" class="features">
+
+<div class="section-title">
+
+<h2>Why Choose ZeeLinks?</h2>
+
+<p>Designed for speed, simplicity, and security.</p>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+
+<i class="fa-solid fa-bolt"></i>
+
+<h3>Lightning Fast</h3>
+
+<p>Quick link analysis and rapid download preparation.</p>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<h3>Secure</h3>
+
+<p>No unnecessary software or registration required.</p>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-film"></i>
+
+<h3>HD Quality</h3>
+
+<p>Download available resolutions when supported.</p>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-mobile-screen"></i>
+
+<h3>Mobile Friendly</h3>
+
+<p>Works on phones, tablets, laptops, and desktops.</p>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-cloud-arrow-down"></i>
+
+<h3>Unlimited</h3>
+
+<p>No daily limits on supported downloads.</p>
+
+</div>
+
+<div class="feature-card">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+<h3>Modern UI</h3>
+
+<p>Elegant interface with dark and light themes.</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- =========================
+        FAQ SECTION
+========================= -->
+
+<section id="faq" class="faq">
+
+    <div class="section-title">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <p>Everything you need to know.</p>
+
+    </div>
+
+    <div class="faq-container">
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Is ZeeLinks free to use?
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Yes. ZeeLinks Portal is free to use. Future premium
+                    features may be added separately.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do I need an account?
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    No registration is required for the basic downloader.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Is my data stored?
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    We recommend keeping user privacy in mind and only storing data you intentionally choose to retain.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+      CONTACT SECTION
+========================= -->
+
+<section id="contact" class="contact">
+
+    <div class="section-title">
+
+        <h2>Contact Us</h2>
+
+        <p>We'd love to hear from you.</p>
+
+    </div>
+
+    <form class="contact-form">
+
+        <input
+            type="text"
+            placeholder="Your Name"
+            required>
+
+        <input
+            type="email"
+            placeholder="Your Email"
+            required>
+
+        <textarea
+            rows="6"
+            placeholder="Your Message"></textarea>
+
+        <button type="submit">
+
+            <i class="fa-solid fa-paper-plane"></i>
+
+            Send Message
+
+        </button>
+
+    </form>
+
+</section>
+
+<!-- =========================
+      NEWSLETTER
+========================= -->
+
+<section class="newsletter">
+
+    <h2>Stay Updated</h2>
+
+    <p>Receive updates about new features.</p>
+
+    <div class="newsletter-box">
+
+        <input
+            type="email"
+            placeholder="Enter your email">
+
+        <button>
+
+            Subscribe
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+      FOOTER
+========================= -->
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-about">
+
+<img
+src="../../assets/logo/logo.png"
+alt="ZeeLinks">
+
+<h3>ZeeLinks Portal</h3>
+
+<p>
+
+Fast • Secure • Modern
+
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<h4>Quick Links</h4>
+
+<a href="https://zeelinks.com.pk/">Home</a>
+
+<a href="#download">Download</a>
+
+<a href="#features">Features</a>
+
+<a href="#faq">FAQ</a>
+
+<a href="https://zeelinks.com.pk/#contact">Contact</a>
+
+</div>
+
+<div class="footer-social">
+
+<h4>Follow Us</h4>
+
+<a href="#"><i class="fab fa-facebook"></i></a>
+
+<a href="#"><i class="fab fa-youtube"></i></a>
+
+<a href="#"><i class="fab fa-instagram"></i></a>
+
+<a href="#"><i class="fab fa-x-twitter"></i></a>
+
+<a href="#"><i class="fab fa-github"></i></a>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+<p>
+
+© 2026 Zee Links.
+
+All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<!-- Scroll To Top -->
+
+<button id="scrollTop">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- Toast Notification -->
+
+<div id="toast">
+
+Ready.
+
+</div>
+
+<!-- JavaScript -->
+
+<script src="downloader.js"></script>
+
+
+
+
+</body>
+
+</html>
+

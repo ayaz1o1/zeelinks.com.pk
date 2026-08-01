@@ -1,42 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<urlset 
-xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-
-<url>
-
-    <loc>https://www.zeelinks.com.pk/</loc>
-
-    <lastmod>2026-07-27</lastmod>
-
-    <changefreq>weekly</changefreq>
-
-    <priority>1.0</priority>
-
-</url>
-
-
-<url>
-
-    <loc>https://www.zeelinks.com/tools</loc>
-
-    <changefreq>monthly</changefreq>
-
-    <priority>0.8</priority>
-
-</url>
-
-
-<url>
-
-    <loc>https://www.zeelinks.com/contact</loc>
-
-    <changefreq>monthly</changefreq>
-
-    <priority>0.7</priority>
-
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://zeelinks.com.pk/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-ai-analytics/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-bandwidth-calculation/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-cable-testing/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-camera-placement/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-fps-bitrate/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-ip-subnetting/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-lens-focal-length/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-resolution/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-storage-calculation/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-switch-selection/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-system-design-checklist/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-troubleshooting-night-vision/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-troubleshooting-no-image/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-troubleshooting-no-recording/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv-wdr-lowlight/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/cctv/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/dahua-ip-nvr/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/dhcp-vs-static-cctv/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/ethernet-cable-categories/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/fiber-cctv-backbone/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/fiber-optic-basics/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/h264-vs-h265-cctv/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/h265-plus-explained/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/hikvision-ip-nvr/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/hikvision-vs-dahua/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/ip-camera-vs-analog/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/networking/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/nvr-decoding-bandwidth/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/nvr-hdd-planning/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/nvr-incoming-bandwidth/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/nvr-multiview/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/nvr-vs-dvr-vs-xvr/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/nvr/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/poe-af-at-bt/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/poe-budget-planning/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/poe/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/troubleshooting/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/vendors/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/vlan-for-cctv/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/wifi-cctv-bridge/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/wifi-fibre/</loc></url>
+  <url><loc>https://zeelinks.com.pk/knowledge/wifi-site-survey/</loc></url>
+  <url><loc>https://zeelinks.com.pk/portfolio.html</loc></url>
+  <url><loc>https://zeelinks.com.pk/privacy.html</loc></url>
+  <url><loc>https://zeelinks.com.pk/products.html</loc></url>
+  <url><loc>https://zeelinks.com.pk/terms.html</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/bandwidth-calculator/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/focal-length-calculator/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/ip-calculator/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/mac-lookup/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/nvr-channel-calculator/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/password-generator/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/poe-calculator/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/qr-generator/</loc></url>
+  <url><loc>https://zeelinks.com.pk/tools/storage-calculator/</loc></url>
 </urlset>

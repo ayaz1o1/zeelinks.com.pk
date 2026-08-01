@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IPv4 Binary Converter & Subnet Bit Explorer | Zee Links</title>
+<meta name="description" content="Convert IPv4 addresses and subnet masks between decimal and binary, visualize network and host bits, and explore CIDR subnetting.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zeelinks.com.pk/tools/ipv4-binary-explorer/">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+.wrap{max-width:1150px;margin:35px auto;padding:0 18px}.card{background:#fff;padding:24px;margin:18px 0;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}label{font-weight:700;display:block;margin-bottom:6px}
+input,select,button{width:100%;padding:11px;border:1px solid #ccd2d8;border-radius:8px;box-sizing:border-box;font:inherit}button{cursor:pointer;font-weight:700}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:18px}.result{padding:14px;border:1px solid #ddd;border-radius:9px}.result small{display:block;opacity:.65;margin-bottom:5px}
+.bits{font-family:monospace;font-size:1.05rem;word-break:break-all;line-height:1.8;background:#f7f8f9;padding:12px;border-radius:8px}
+.octets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.octet{border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center}.octet b{display:block;font-family:monospace;font-size:1.2rem}
+.table{overflow:auto}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:9px;text-align:left;vertical-align:top}th{font-weight:700}
+.note{padding:13px;background:#f5f6f7;border-left:4px solid #555;margin:14px 0}.error{font-weight:700;margin-top:10px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0}.legend span{font-weight:700}.network{letter-spacing:1px}.host{letter-spacing:1px}
+</style>
+</head>
+<body>
+<header class="header"><div class="container">
+<a href="../../index.html" class="logo"><img src="../../assets/logo/logo.png" alt="Zee Links Logo"><div class="logo-text"><h2>Zee Links</h2><span>Connecting Technology. Securing Tomorrow.</span></div></a>
+<nav class="navbar"><ul><li><a href="../../index.html">Home</a></li><li><a href="../../knowledge/index.html">Knowledge</a></li><li><a href="../index.html">Tools</a></li><li><a href="../../products.html">Products</a></li></ul></nav>
+</div></header>
+
+<main class="wrap">
+<section class="card">
+<span class="section-tag">Networking Tool · Phase 4B-4</span>
+<h1>IPv4 ↔ Binary Converter & Subnet Bit Explorer</h1>
+<p>Convert IPv4 addresses and subnet masks into binary and see exactly which bits belong to the network and which remain available for hosts.</p>
+
+<div class="grid">
+<div><label for="ip">IPv4 Address</label><input id="ip" value="192.168.10.25" placeholder="192.168.10.25"></div>
+<div><label for="cidr">CIDR Prefix</label><select id="cidr"></select></div>
+<div><label for="mask">Subnet Mask</label><input id="mask" value="255.255.255.0" placeholder="255.255.255.0"></div>
+</div>
+<button id="go">Explore Bits</button>
+<div id="err" class="error"></div>
+</section>
+
+<section class="card" id="outCard" hidden>
+<h2>Binary Representation</h2>
+<div id="out"></div>
+</section>
+
+<section class="card" id="bitCard" hidden>
+<h2>Subnet Bit Explorer</h2>
+<p id="bitSummary"></p>
+<div class="legend"><span>Network bits = prefix portion</span><span>Host bits = remaining portion</span></div>
+<div class="bits network" id="bitLine"></div>
+<div class="octets" id="octets"></div>
+<div class="results" id="stats"></div>
+</section>
+
+<section class="card">
+<h2>Why Binary Matters in Subnetting</h2>
+<p>IPv4 addresses contain <strong>32 bits</strong>, divided into four 8-bit octets. A CIDR prefix tells you how many of those bits are network bits.</p>
+<div class="note"><strong>Example: 192.168.10.25/24</strong><br>
+The first 24 bits identify the network. The final 8 bits identify hosts within that subnet.</div>
+<div class="table"><table><thead><tr><th>Concept</th><th>Binary meaning</th><th>Example</th></tr></thead><tbody>
+<tr><td>Network bit</td><td>Covered by the CIDR prefix</td><td>/24 = first 24 bits</td></tr>
+<tr><td>Host bit</td><td>Left after the prefix</td><td>/24 = last 8 bits</td></tr>
+<tr><td>Subnet mask bit 1</td><td>Network portion</td><td>255.255.255.0</td></tr>
+<tr><td>Subnet mask bit 0</td><td>Host portion</td><td>0.0.0.255 in the last octet</td></tr>
+<tr><td>Wildcard bit 0</td><td>Must match</td><td>Cisco ACL/OSPF matching</td></tr>
+<tr><td>Wildcard bit 1</td><td>Ignored</td><td>Cisco ACL/OSPF matching</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="card">
+<h2>Subnetting Bit Patterns</h2>
+<div class="table"><table><thead><tr><th>CIDR</th><th>Last-octet mask</th><th>Binary</th><th>Total addresses</th><th>Traditional usable hosts</th></tr></thead><tbody>
+<tr><td>/24</td><td>255</td><td>11111111</td><td>256</td><td>254</td></tr>
+<tr><td>/25</td><td>128</td><td>10000000</td><td>128</td><td>126</td></tr>
+<tr><td>/26</td><td>192</td><td>11000000</td><td>64</td><td>62</td></tr>
+<tr><td>/27</td><td>224</td><td>11100000</td><td>32</td><td>30</td></tr>
+<tr><td>/28</td><td>240</td><td>11110000</td><td>16</td><td>14</td></tr>
+<tr><td>/29</td><td>248</td><td>11111000</td><td>8</td><td>6</td></tr>
+<tr><td>/30</td><td>252</td><td>11111100</td><td>4</td><td>2</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="card">
+<h2>Related Zee Links Tools</h2>
+<ul>
+<li><a href="../ip-calculator/index.html">IPv4 Subnet & IP Address Calculator</a></li>
+<li><a href="../ip-range-calculator/index.html">IP Range & Host Calculator</a></li>
+<li><a href="../vlsm-planner/index.html">VLSM & Subnet Planner</a></li>
+<li><a href="../wildcard-calculator/index.html">Wildcard Mask Calculator</a></li>
+<li><a href="../../knowledge/cctv-ip-subnetting/index.html">CCTV IP Subnetting Guide</a></li>
+</ul>
+</section>
+</main>
+
+<script>
+const c=document.getElementById('cidr'),m=document.getElementById('mask'),ip=document.getElementById('ip'),err=document.getElementById('err');
+for(let i=0;i<=32;i++){let o=document.createElement('option');o.value=i;o.textContent='/'+i;c.appendChild(o)} c.value=24;
+
+function n(s){let a=s.trim().split('.');if(a.length!==4||a.some(x=>!/^\d+$/.test(x)||+x>255))throw Error('Enter a valid IPv4 address or subnet mask.');return (((+a[0])*256+ +a[1])*256+ +a[2])*256+ +a[3]}
+function ipx(x){return [Math.floor(x/16777216)%256,Math.floor(x/65536)%256,Math.floor(x/256)%256,x%256].join('.')}
+function pm(p){return p===0?'0.0.0.0':ipx((0xffffffff<<(32-p))>>>0)}
+function mp(s){let x=n(s)>>>0,p=0,z=false;for(let i=31;i>=0;i--){if((x>>>i)&1){if(z)throw Error('Subnet mask is not contiguous.');p++}else z=true}return p}
+function bits8(x){return (x&255).toString(2).padStart(8,'0')}
+function bits32(x){return [24,16,8,0].map(s=>bits8(x>>>s)).join(' ')}
+function calc(){
+ err.textContent='';
+ try{
+  let p=Number(c.value);if(m.value.trim()){p=mp(m.value);c.value=p}
+  const x=n(ip.value)>>>0, sm=n(pm(p))>>>0, network=(x&sm)>>>0, wildcard=(~sm)>>>0;
+  const total=2**(32-p), usable=p===31?2:p===32?1:Math.max(total-2,0);
+  document.getElementById('out').innerHTML=
+   '<div class="results">'+[
+    ['IPv4 Decimal',ip.value],['CIDR','/'+p],['Subnet Mask',pm(p)],['IPv4 Binary',bits32(x)],
+    ['Mask Binary',bits32(sm)],['Network Address',ipx(network)],['Network Binary',bits32(network)],
+    ['Wildcard Mask',ipx(wildcard)],['Total Addresses',total.toLocaleString()],['Usable Hosts',usable.toLocaleString()]
+   ].map(r=>'<div class="result"><small>'+r[0]+'</small><b>'+r[1]+'</b></div>').join('')+'</div>';
+  document.getElementById('outCard').hidden=false;
+
+  const b=bits32(x).replaceAll(' ','');
+  let html='';
+  for(let i=0;i<32;i++) html+='<span class="'+(i<p?'network':'host')+'">'+b[i]+'</span>'+(i%8===7?' ':'');
+  document.getElementById('bitLine').innerHTML=html;
+  document.getElementById('bitSummary').innerHTML='For <strong>/'+p+'</strong>, <strong>'+p+' network bits</strong> and <strong>'+(32-p)+' host bits</strong> are present.';
+  const octets=ip.value.split('.');
+  document.getElementById('octets').innerHTML=octets.map((v,i)=>'<div class="octet"><b>'+bits8(+v)+'</b>Octet '+(i+1)+'<br>Decimal: '+v+'</div>').join('');
+  document.getElementById('stats').innerHTML=[
+   ['Network bits',p],['Host bits',32-p],['Possible addresses',total.toLocaleString()],['Traditional usable hosts',usable.toLocaleString()]
+  ].map(r=>'<div class="result"><small>'+r[0]+'</small><b>'+r[1]+'</b></div>').join('');
+  document.getElementById('bitCard').hidden=false;
+ }catch(e){err.textContent=e.message}
+}
+m.oninput=()=>{try{c.value=mp(m.value)}catch(e){}};c.onchange=()=>m.value=pm(+c.value);document.getElementById('go').onclick=calc;calc();
+</script>
+</body>
+</html>

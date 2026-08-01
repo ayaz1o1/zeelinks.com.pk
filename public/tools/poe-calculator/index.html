@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PoE Budget Calculator | Zee Links</title>
+<meta name="description" content="Estimate PoE power requirements and switch budget for network devices.">
+<link rel="icon" href="../../assets/logo/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/tools.css">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zeelinks.com.pk/tools/poe-calculator/">
+</head><body class="tool-page">
+<header class="header"><div class="container">
+<a href="https://zeelinks.com.pk/" class="logo"><img src="../../assets/logo/logo.png" alt="Zee Links Logo"><div class="logo-text"><h2>Zee Links</h2><span>Connecting Technology. Securing Tomorrow.</span></div></a>
+<nav class="navbar"><ul>
+<li><a href="https://zeelinks.com.pk/">Home</a></li><li><a href="https://zeelinks.com.pk/#services">Services</a></li>
+<li><a href="https://zeelinks.com.pk/#products">Products</a></li><li><a href="https://zeelinks.com.pk/#tools">Tools</a></li><li><a href="https://zeelinks.com.pk/#contact">Contact</a></li>
+</ul></nav>
+<div class="header-actions"><a href="https://wa.me/923072262350" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+<button class="mobile-toggle" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button></div>
+</div></header>
+<section class="tool-hero"><div class="container"><span class="section-tag" style="color:#67e8f9">Zee Links Tools</span><h1>PoE Budget Calculator</h1><p>Estimate PoE switch budget, per-port compatibility and recommended power reserve for cameras, access points and other PoE devices.</p></div></section>
+<main class="tool-wrap"><div class="tool-panel">
+<h2>PoE Budget Calculator</h2>
+<div class="tool-grid">
+<div class="tool-field"><label>Device type</label><select id="type"><option value="12">Standard IP Camera (12W)</option><option value="25">PTZ / IR Camera (25W)</option><option value="30">Wi-Fi AP (30W)</option><option value="60">High-power AP (60W)</option></select></div>
+<div class="tool-field"><label>Quantity</label><input id="qty" type="number" value="8" min="1" step="1"></div>
+<div class="tool-field"><label>PoE standard</label><select id="standard"><option value="af">802.3af (PoE)</option><option value="at" selected>802.3at (PoE+)</option><option value="bt3">802.3bt Type 3</option><option value="bt4">802.3bt Type 4</option></select></div>
+<div class="tool-field"><label>Safety headroom (%)</label><input id="head" type="number" value="20" min="0"></div>
+</div>
+<div class="tool-actions"><button class="btn btn-primary" id="calc"><i class="fas fa-bolt"></i> Calculate</button></div>
+<div id="result" class="tool-result"></div>
+</div></main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><span>© <span class="current-year"></span> Zee Links. All rights reserved.</span><a href="https://zeelinks.com.pk/">Back to Website</a></div></div></footer>
+<script src="../../js/app.js"></script><script>
+function calcPoe(){const w=+document.getElementById("type").value,q=+document.getElementById("qty").value,h=+document.getElementById("head").value,standard=document.getElementById("standard").value;if(!(w>0&&Number.isInteger(q)&&q>0&&h>=0)){result.innerHTML="<strong>Please enter valid values.</strong>";return;}const specs={af:{pse:15.4,pd:12.95,label:"802.3af"},at:{pse:30,pd:25.5,label:"802.3at"},bt3:{pse:60,pd:51,label:"802.3bt Type 3"},bt4:{pse:90,pd:71.3,label:"802.3bt Type 4"}}[standard];const total=w*q,recommended=total*(1+h/100),compatible=w<=specs.pd;result.classList.add("show");result.innerHTML=`<strong>Recommended PoE budget: ${recommended.toFixed(1)} W</strong><div class="result-grid"><div class="result-box"><small>Device load</small><strong>${total.toFixed(1)} W</strong></div><div class="result-box"><small>Reserve</small><strong>${h.toFixed(0)}%</strong></div><div class="result-box"><small>Selected standard</small><strong>${specs.label}</strong></div></div>${compatible?`<div class="result-ok">${w} W per device is within the approximate ${specs.pd} W powered-device limit of ${specs.label}.</div>`:`<div class="result-warn">${w} W per device exceeds the approximate ${specs.pd} W powered-device limit of ${specs.label}. Select a higher PoE standard or lower-power device.</div>`}<div class="formula-note"><strong>Important:</strong> the switch's total PoE budget must meet or exceed ${recommended.toFixed(1)} W, and each port must support the device's actual draw. PSE and powered-device limits differ by standard.</div>`;}document.getElementById("calc").onclick=calcPoe;calcPoe();</script><section class="related-guides" style="max-width:1100px;margin:30px auto;padding:0 20px"><h2>Technical guides</h2><p><a href="../../knowledge/poe-af-at-bt/index.html">../knowledge/poe-af-at-bt/index.html</a> · <a href="../../knowledge/poe-budget-planning/index.html">../knowledge/poe-budget-planning/index.html</a></p></section><section class="related-guides"><h2>Explore related technical guides</h2><p>Learn the theory behind this calculator and apply the results to real CCTV system design.</p><ul><li><a href="../../knowledge/poe-af-at-bt/index.html">PoE 802.3af vs 802.3at vs 802.3bt Explained</a></li><li><a href="../../knowledge/poe-budget-planning/index.html">How to Calculate a PoE Switch Budget for CCTV</a></li><li><a href="../../knowledge/cctv-switch-selection/index.html">How to Choose a Network Switch for IP Cameras</a></li></ul></section></body></html>

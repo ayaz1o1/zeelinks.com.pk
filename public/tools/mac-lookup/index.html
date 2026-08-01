@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAC Vendor Lookup | Zee Links</title>
+<meta name="description" content="Look up the manufacturer associated with a MAC address prefix.">
+<link rel="icon" href="../../assets/logo/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/tools.css">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zeelinks.com.pk/tools/mac-lookup/">
+</head><body class="tool-page">
+<header class="header"><div class="container">
+<a href="https://zeelinks.com.pk/" class="logo"><img src="../../assets/logo/logo.png" alt="Zee Links Logo"><div class="logo-text"><h2>Zee Links</h2><span>Connecting Technology. Securing Tomorrow.</span></div></a>
+<nav class="navbar"><ul>
+<li><a href="https://zeelinks.com.pk/">Home</a></li><li><a href="https://zeelinks.com.pk/#services">Services</a></li>
+<li><a href="https://zeelinks.com.pk/#products">Products</a></li><li><a href="https://zeelinks.com.pk/#tools">Tools</a></li><li><a href="https://zeelinks.com.pk/#contact">Contact</a></li>
+</ul></nav>
+<div class="header-actions"><a href="https://wa.me/923072262350" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+<button class="mobile-toggle" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button></div>
+</div></header>
+<section class="tool-hero"><div class="container"><span class="section-tag" style="color:#67e8f9">Zee Links Tools</span><h1>MAC Vendor Lookup</h1><p>Identify common MAC address manufacturers from a small offline OUI starter database.</p></div></section>
+<main class="tool-wrap"><div class="tool-panel">
+<h2>MAC Vendor Lookup</h2>
+<div class="tool-grid"><div class="tool-field full"><label>MAC address</label><input id="mac" value="00:1B:21:12:34:56" placeholder="AA:BB:CC:DD:EE:FF"></div></div>
+<div class="tool-actions"><button class="btn btn-primary" id="lookup">Lookup</button></div><div id="result" class="tool-result"></div>
+<p class="tool-note">This offline starter database contains common OUIs. A full live OUI database can be added later without changing the page design.</p>
+</div></main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><span>© <span class="current-year"></span> Zee Links. All rights reserved.</span><a href="https://zeelinks.com.pk/">Back to Website</a></div></div></footer>
+<script src="../../js/app.js"></script><script>
+const oui={"001B21":"Intel (common OUI)","001A2B":"Cisco (example OUI)","B827EB":"Raspberry Pi","DCA632":"Raspberry Pi","F4F5D8":"TP-Link (common range)","68FF7B":"TP-Link (common range)","74ACB9":"Ubiquiti (common range)"};
+document.getElementById("lookup").onclick=()=>{const raw=mac.value.toUpperCase().replace(/[^0-9A-F]/g,"");if(raw.length!==12){result.innerHTML="<strong>Enter a valid 12-hex-digit MAC address.</strong>";return}const key=raw.slice(0,6);result.innerHTML=`<strong>MAC:</strong> ${raw.match(/.{2}/g).join(":")}<br><strong>Local database result:</strong> ${oui[key]||"OUI not in the local starter database"}`};
+</script>
+</body></html>

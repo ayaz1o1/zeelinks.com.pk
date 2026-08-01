@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCTV Disk Storage Calculator | Zee Links</title>
+<meta name="description" content="Estimate CCTV recording storage from camera count, bitrate and retention days.">
+<link rel="icon" href="../../assets/logo/favicon.png">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/tools.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+:root{
+  --calc-red:#e11d1d;
+  --calc-red-dark:#b91c1c;
+  --calc-bg:#f5f6f8;
+  --calc-line:#e2e5e9;
+  --calc-text:#1f2937;
+  --calc-muted:#8a8f96;
+}
+.calc-page{background:var(--calc-bg);min-height:100vh;padding-bottom:80px}
+.calc-hero{padding:145px 0 48px;background:linear-gradient(135deg,#020617,#123b76);color:#fff}
+.calc-hero h1{font-family:Poppins,sans-serif;font-size:44px;margin:10px 0 8px}
+.calc-hero p{max-width:780px;color:#dbeafe;margin:0}
+.calc-shell{max-width:1050px;margin:-18px auto 0;position:relative;padding:0 18px}
+.calc-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 16px 45px rgba(15,23,42,.12);overflow:hidden}
+.calc-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--calc-line)}
+.calc-tab{appearance:none;border:0;background:#fff;padding:22px 18px;font:600 19px Inter,sans-serif;color:#344054;cursor:pointer;border-right:1px solid var(--calc-line)}
+.calc-tab:last-child{border-right:0}
+.calc-tab.active{background:#eeeeef;color:#344054;box-shadow:inset 0 -3px 0 #d1d5db}
+.calc-body{padding:0}
+.calc-section-title{font-size:18px;font-weight:600;color:#9a9da1;background:#fafafa;border-bottom:1px solid var(--calc-line);padding:18px 28px}
+.choice-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--calc-line)}
+.choice{display:flex;align-items:center;gap:14px;padding:21px 28px;cursor:pointer;font-size:20px;color:#344054;border-right:1px solid var(--calc-line)}
+.choice:last-child{border-right:0}
+.radio{width:25px;height:25px;border:2px solid #c8cdd3;border-radius:50%;display:grid;place-items:center;flex:none}
+.choice.active .radio{border-color:var(--calc-red);background:var(--calc-red)}
+.choice.active .radio:after{content:"";width:10px;height:10px;border-radius:50%;background:#fff}
+.form-row{display:grid;grid-template-columns:1fr 1.5fr;align-items:stretch;border-bottom:1px solid var(--calc-line)}
+.form-label{padding:20px 28px;color:#92969b;background:#fbfbfb;font-size:18px}
+.form-control{padding:14px 28px;display:flex;align-items:center}
+.form-control select,.form-control input{width:100%;padding:10px 0;border:0;outline:0;background:transparent;font:500 20px Inter,sans-serif;color:#111827}
+.form-control select{cursor:pointer}
+.form-control input::placeholder{color:#a2a6ab}
+.unit{font-size:19px;color:#111827;margin-left:10px;white-space:nowrap}
+.calc-actions{display:flex;gap:22px;padding:28px}
+.calc-btn{flex:1;border-radius:11px;padding:17px 24px;font:600 20px Inter,sans-serif;cursor:pointer;border:1px solid #d1d5db;background:#fff;color:#4b5563}
+.calc-btn.primary{background:var(--calc-red);border-color:var(--calc-red);color:#fff}
+.calc-btn.primary:hover{background:var(--calc-red-dark)}
+.result{margin:0 28px 28px;padding:22px;border-radius:12px;background:#f8fafc;border:1px solid #e2e8f0;display:none}
+.result.show{display:block}
+.result-main{font:700 29px Poppins,sans-serif;color:#111827;margin-bottom:7px}
+.result-sub{color:#667085;line-height:1.6}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.result-box{padding:14px;border-radius:10px;background:#fff;border:1px solid #e5e7eb}
+.result-box small{display:block;color:#8b929a;margin-bottom:5px}
+.result-box strong{font-size:18px;color:#111827}
+.help{padding:0 28px 28px;color:#667085;line-height:1.7}
+.help strong{color:#344054}
+@media(max-width:700px){
+  .calc-hero{padding-top:120px}.calc-hero h1{font-size:32px}
+  .choice-row,.form-row{grid-template-columns:1fr}
+  .choice{border-right:0;border-bottom:1px solid var(--calc-line)}
+  .form-label{padding-bottom:8px}.form-control{padding-top:5px}
+  .calc-actions{flex-direction:column}
+  .result-grid{grid-template-columns:1fr}
+  .calc-tab{font-size:16px;padding:17px 8px}
+}
+</style>
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zeelinks.com.pk/tools/storage-calculator/">
+</head>
+<body class="calc-page">
+
+<header class="header">
+  <div class="container">
+    <a href="https://zeelinks.com.pk/" class="logo">
+      <img src="../../assets/logo/logo.png" alt="Zee Links Logo">
+      <div class="logo-text"><h2>Zee Links</h2><span>Connecting Technology. Securing Tomorrow.</span></div>
+    </a>
+    <nav class="navbar"><ul>
+      <li><a href="https://zeelinks.com.pk/">Home</a></li>
+      <li><a href="https://zeelinks.com.pk/#services">Services</a></li>
+      <li><a href="https://zeelinks.com.pk/#products">Products</a></li>
+      <li><a href="https://zeelinks.com.pk/#tools">Tools</a></li>
+      <li><a href="https://zeelinks.com.pk/#contact">Contact</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <a href="https://wa.me/923072262350" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <button class="mobile-toggle" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<section class="calc-hero">
+  <div class="container">
+    <span class="section-tag" style="color:#67e8f9">Zee Links Tools</span>
+    <h1>CCTV Disk Calculator</h1>
+    <p>Calculate required recording storage or estimate recording time from camera resolution, codec, bitrate and retention settings.</p>
+  </div>
+</section>
+
+<main class="calc-shell">
+<div class="calc-card">
+  <div class="calc-tabs">
+    <button class="calc-tab active" data-mode="space">Recording Space</button>
+    <button class="calc-tab" data-mode="time">Recording Time</button>
+  </div>
+
+  <div class="calc-body">
+    <div class="calc-section-title">Calculation Condition</div>
+
+    <div class="choice-row">
+      <div class="choice active" data-condition="resolution">
+        <span class="radio"></span><span>Resolution</span>
+      </div>
+      <div class="choice" data-condition="bitrate">
+        <span class="radio"></span><span>Bitrate</span>
+      </div>
+    </div>
+
+    <div id="resolutionFields">
+      <div class="calc-section-title">Encoding</div>
+      <div class="form-row">
+        <div class="form-label">Encoding</div>
+        <div class="form-control">
+          <select id="codec">
+            <option value="h265">H.265</option>
+            <option value="h264">H.264</option>
+            <option value="h265plus">H.265+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-section-title">Resolution</div>
+      <div class="form-row">
+        <div class="form-label">Resolution</div>
+        <div class="form-control">
+          <select id="resolution">
+            <option value="0.92">720P (1280×720)</option>
+            <option value="2">1080P (1920×1080)</option>
+            <option value="4">4MP (2560×1440)</option>
+            <option value="5">5MP (2560×1920)</option>
+            <option value="6">6MP (3072×2048)</option>
+            <option value="8">8MP / 4K (3840×2160)</option>
+            <option value="12">12MP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-section-title">Frame Rate</div>
+      <div class="form-row">
+        <div class="form-label">Frame Rate</div>
+        <div class="form-control">
+          <select id="fps">
+            <option value="15">15 fps</option>
+            <option value="20">20 fps</option>
+            <option value="25" selected>25 fps</option>
+            <option value="30">30 fps</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="bitrateField" style="display:none">
+      <div class="calc-section-title">Bitrate</div>
+      <div class="form-row">
+        <div class="form-label">Bitrate per camera</div>
+        <div class="form-control">
+          <input id="bitrate" type="number" min="0.05" step="0.05" value="2">
+          <span class="unit">Mbps</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-section-title">Camera Number</div>
+    <div class="form-row">
+      <div class="form-label">Camera Number</div>
+      <div class="form-control">
+        <input id="cameras" type="number" min="1" step="1" value="16" placeholder="Please Input">
+      </div>
+    </div>
+
+    <div id="spaceInputs">
+      <div class="calc-section-title">Recording Time</div>
+      <div class="form-row">
+        <div class="form-label">Recording Time</div>
+        <div class="form-control">
+          <input id="days" type="number" min="0.01" step="0.01" value="30" placeholder="Please Input">
+          <span class="unit">Days</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-label">Recording Hours / Day</div>
+        <div class="form-control">
+          <input id="hours" type="number" min="0.1" max="24" step="0.1" value="24">
+          <span class="unit">Hours</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="timeInputs" style="display:none">
+      <div class="calc-section-title">Disk Capacity</div>
+      <div class="form-row">
+        <div class="form-label">Disk Capacity</div>
+        <div class="form-control">
+          <input id="disk" type="number" min="0.01" step="0.01" value="4" placeholder="Please Input">
+          <span class="unit">TB</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-label">Recording Hours / Day</div>
+        <div class="form-control">
+          <input id="timeHours" type="number" min="0.1" max="24" step="0.1" value="24">
+          <span class="unit">Hours</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-actions">
+      <button class="calc-btn primary" id="calculate"><i class="fa-solid fa-calculator"></i> Calculate</button>
+      <button class="calc-btn" id="clear"><i class="fa-solid fa-rotate-left"></i> Clear</button>
+    </div>
+
+    <div class="result" id="result" aria-live="polite"></div>
+
+    <div class="help">
+      <strong>How the estimate works:</strong> the calculator converts the selected video bitrate into storage over the selected number of cameras and recording hours. Resolution mode uses practical starting bitrate estimates for H.264, H.265 and H.265+; for the most accurate result, use the camera/NVR's actual configured bitrate in Bitrate mode.
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span class="current-year"></span> Zee Links. All rights reserved.</span>
+      <a href="https://zeelinks.com.pk/">Back to Website</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/app.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let mode = "space";
+  let condition = "resolution";
+
+  // Practical starting bitrates at 25 fps. These are estimates, not manufacturer guarantees.
+  const baseMbps = {
+    h264: {0.92:2.0, 2:4.0, 4:6.0, 5:7.0, 6:8.0, 8:10.0, 12:14.0},
+    h265: {0.92:1.0, 2:2.0, 4:3.0, 5:3.5, 6:4.0, 8:5.0, 12:7.0},
+    h265plus: {0.92:0.7, 2:1.2, 4:1.8, 5:2.1, 6:2.4, 8:3.0, 12:4.2}
+  };
+
+  function getBitrate() {
+    if (condition === "bitrate") return Number($("bitrate").value);
+    const base = baseMbps[$("codec").value]?.[$("resolution").value] || 2;
+    return base * (Number($("fps").value) / 25);
+  }
+
+  function formatStorage(tb) {
+    if (tb < 1) return `${(tb * 1000).toFixed(0)} GB`;
+    return `${tb.toFixed(2)} TB`;
+  }
+
+  function showResult(title, subtitle, boxes, extra="") {
+    $("result").classList.add("show");
+    $("result").innerHTML = `<div class="result-main">${title}</div><div class="result-sub">${subtitle}</div><div class="result-grid">${boxes.map(x => `<div class="result-box"><small>${x.label}</small><strong>${x.value}</strong></div>`).join("")}</div>${extra}`;
+  }
+
+  function calculate() {
+    const cameras=Number($("cameras").value), mbps=getBitrate();
+    if (!(cameras>=1 && Number.isFinite(mbps) && mbps>0)) return showResult("Please enter valid values.","Camera count and bitrate must be greater than zero.",[]);
+    if (mode === "space") {
+      const days=Number($("days").value), hours=Number($("hours").value);
+      if (!(days>0 && hours>0 && hours<=24)) return showResult("Please enter valid recording time.","Hours/day must be between 0.1 and 24.",[]);
+      const totalGB = mbps*cameras*3600*hours*days/8/1000;
+      const tb=totalGB/1000;
+      showResult(`Estimated Storage: ${formatStorage(tb)}`,`Approximate continuous recording for ${cameras} camera(s), ${hours} hours/day, ${days} day(s).`,[
+        {label:"Bitrate / camera",value:`${mbps.toFixed(2)} Mbps`},
+        {label:"Total video bitrate",value:`${(mbps*cameras).toFixed(2)} Mbps`},
+        {label:"Estimated storage",value:formatStorage(tb)}
+      ],`<div class="formula-note"><strong>Calculation basis:</strong> storage = bitrate × cameras × recording time ÷ 8. Capacity is shown using decimal units (1 TB = 1,000 GB). Actual retention varies with scene motion, I-frame settings, VBR/CBR behavior, audio, and recorder overhead.</div>`);
+    } else {
+      const diskTB=Number($("disk").value), hours=Number($("timeHours").value);
+      if (!(diskTB>0 && hours>0 && hours<=24)) return showResult("Please enter valid disk capacity.","Disk capacity must be greater than zero and hours/day must be between 0.1 and 24.",[]);
+      const totalHours=(diskTB*1000000*8)/(mbps*cameras*3600), days=totalHours/hours;
+      showResult(`Estimated Recording Time: ${days.toFixed(2)} Days`,`Approximate retention using ${diskTB} TB for ${cameras} camera(s).`,[
+        {label:"Bitrate / camera",value:`${mbps.toFixed(2)} Mbps`},
+        {label:"Total video bitrate",value:`${(mbps*cameras).toFixed(2)} Mbps`},
+        {label:"Retention",value:`${days.toFixed(2)} days`}
+      ],`<div class="formula-note"><strong>Note:</strong> The result is a theoretical video-storage estimate. Real NVR retention can be lower because of formatting, filesystem overhead, audio, metadata and bitrate variation.</div>`);
+    }
+  }
+
+  document.querySelectorAll(".calc-tab").forEach(tab=>tab.addEventListener("click",()=>{
+    document.querySelectorAll(".calc-tab").forEach(x=>x.classList.remove("active")); tab.classList.add("active"); mode=tab.dataset.mode;
+    $("spaceInputs").style.display=mode==="space"?"":"none"; $("timeInputs").style.display=mode==="time"?"":"none"; $("result").classList.remove("show");
+  }));
+  document.querySelectorAll(".choice").forEach(choice=>choice.addEventListener("click",()=>{
+    document.querySelectorAll(".choice").forEach(x=>x.classList.remove("active")); choice.classList.add("active"); condition=choice.dataset.condition;
+    $("resolutionFields").style.display=condition==="resolution"?"":"none"; $("bitrateField").style.display=condition==="bitrate"?"":"none"; $("result").classList.remove("show");
+  }));
+  $("calculate").addEventListener("click",calculate);
+  $("clear").addEventListener("click",()=>{["cameras","days","hours","disk","timeHours","bitrate"].forEach(id=>$(id).value=""); $("codec").value="h265"; $("resolution").value="2"; $("fps").value="25"; $("result").classList.remove("show");});
+})();
+</script>
+<section class="related-guides" style="max-width:1100px;margin:30px auto;padding:0 20px"><h2>Technical guides</h2><p><a href="../../knowledge/cctv-storage-calculation/index.html">../knowledge/cctv-storage-calculation/index.html</a> · <a href="../../knowledge/h264-vs-h265-cctv/index.html">../knowledge/h264-vs-h265-cctv/index.html</a></p></section><section class="related-guides"><h2>Explore related technical guides</h2><p>Learn the theory behind this calculator and apply the results to real CCTV system design.</p><ul><li><a href="../../knowledge/cctv-storage-calculation/index.html">How to Calculate CCTV Recording Storage</a></li><li><a href="../../knowledge/nvr-hdd-planning/index.html">CCTV HDD Planning: Storage Capacity, Retention and Health</a></li><li><a href="../../knowledge/cctv-fps-bitrate/index.html">CCTV FPS and Bitrate Explained</a></li></ul></section></body>
+</html>

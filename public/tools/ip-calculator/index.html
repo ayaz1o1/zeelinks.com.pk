@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IPv4 Subnet & IP Address Calculator | Zee Links</title>
+<meta name="description" content="IPv4 subnet calculator with subnet mask, CIDR, network, broadcast, host range, wildcard mask and private, public and special-use IPv4 range reference.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zeelinks.com.pk/tools/ip-calculator/">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+.wrap{max-width:1100px;margin:35px auto;padding:0 18px}.card{background:#fff;padding:24px;margin:18px 0;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}label{font-weight:bold;display:block;margin-bottom:6px}
+input,select,button{width:100%;padding:11px;border:1px solid #ccd2d8;border-radius:8px;box-sizing:border-box;font:inherit}button{cursor:pointer;font-weight:bold}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;margin-top:18px}.result{padding:13px;border:1px solid #ddd;border-radius:9px}.result small{display:block;opacity:.65;margin-bottom:5px}
+.table{overflow:auto}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:9px;text-align:left}th{font-weight:bold}.note{padding:13px;background:#f5f6f7;border-left:4px solid #555;margin:14px 0}.error{font-weight:bold;margin-top:10px}
+</style></head><body>
+<header class="header"><div class="container"><a href="../../index.html" class="logo"><img src="../../assets/logo/logo.png" alt="Zee Links Logo"><div class="logo-text"><h2>Zee Links</h2><span>Connecting Technology. Securing Tomorrow.</span></div></a>
+<nav class="navbar"><ul><li><a href="../../index.html">Home</a></li><li><a href="../../knowledge/index.html">Knowledge</a></li><li><a href="../index.html">Tools</a></li><li><a href="../../products.html">Products</a></li></ul></nav></div></header>
+<main class="wrap">
+<section class="card"><span class="section-tag">Networking Tool</span><h1>IPv4 Subnet & IP Address Calculator</h1>
+<p>Calculate subnet mask, CIDR, network address, broadcast, usable host range and wildcard mask — and learn the major private, public and special-use IPv4 ranges.</p>
+<div class="grid"><div><label>IPv4 Address</label><input id="ip" value="192.168.10.25"></div><div><label>CIDR Prefix</label><select id="cidr"></select></div><div><label>Subnet Mask</label><input id="mask" value="255.255.255.0"></div></div>
+<p class="note">Example: <b>192.168.10.25/24</b> equals subnet mask <b>255.255.255.0</b>.</p><button id="go">Calculate</button><div id="err" class="error"></div><div id="out" class="results"></div></section>
+
+<section class="card"><h2>IPv4 Address Ranges: Private, Public & Special</h2>
+<p><b>Public IPv4 is not one single range.</b> In general, globally routable unicast addresses are public candidates after excluding special-use, private, multicast, loopback, link-local, documentation and reserved space.</p>
+<div class="table"><table><thead><tr><th>Range</th><th>CIDR</th><th>Type / purpose</th><th>Practical meaning</th></tr></thead><tbody>
+<tr><td>0.0.0.0 – 0.255.255.255</td><td>0.0.0.0/8</td><td>Special use / “this network”</td><td>Not normal public host addressing. 0.0.0.0 also means unspecified in many contexts.</td></tr>
+<tr><td>10.0.0.0 – 10.255.255.255</td><td>10.0.0.0/8</td><td>Private</td><td>RFC 1918; common for LAN, CCTV and enterprise networks.</td></tr>
+<tr><td>100.64.0.0 – 100.127.255.255</td><td>100.64.0.0/10</td><td>Shared / CGNAT</td><td>Carrier-grade NAT space; not ordinary private LAN space and not globally routable public space.</td></tr>
+<tr><td>127.0.0.0 – 127.255.255.255</td><td>127.0.0.0/8</td><td>Loopback</td><td>Traffic returns to the local host. 127.0.0.1 is the common example.</td></tr>
+<tr><td>169.254.0.0 – 169.254.255.255</td><td>169.254.0.0/16</td><td>Link-local</td><td>Often self-assigned when DHCP cannot provide an IPv4 address.</td></tr>
+<tr><td>172.16.0.0 – 172.31.255.255</td><td>172.16.0.0/12</td><td>Private</td><td>RFC 1918. Only 172.16–172.31 is private.</td></tr>
+<tr><td>192.0.0.0 – 192.0.0.255</td><td>192.0.0.0/24</td><td>Special purpose</td><td>Protocol/special-purpose address space; not normal public host addressing.</td></tr>
+<tr><td>192.0.2.0 – 192.0.2.255</td><td>192.0.2.0/24</td><td>Documentation</td><td>TEST-NET-1; use for examples and documentation.</td></tr>
+<tr><td>192.168.0.0 – 192.168.255.255</td><td>192.168.0.0/16</td><td>Private</td><td>RFC 1918; extremely common in home, office and CCTV networks.</td></tr>
+<tr><td>198.18.0.0 – 198.19.255.255</td><td>198.18.0.0/15</td><td>Benchmark testing</td><td>Reserved for network-device/interconnect benchmark tests.</td></tr>
+<tr><td>198.51.100.0 – 198.51.100.255</td><td>198.51.100.0/24</td><td>Documentation</td><td>TEST-NET-2; use for examples and documentation.</td></tr>
+<tr><td>203.0.113.0 – 203.0.113.255</td><td>203.0.113.0/24</td><td>Documentation</td><td>TEST-NET-3; use for examples and documentation.</td></tr>
+<tr><td>224.0.0.0 – 239.255.255.255</td><td>224.0.0.0/4</td><td>Multicast</td><td>Multicast addressing, not ordinary unicast host addressing.</td></tr>
+<tr><td>240.0.0.0 – 255.255.255.255</td><td>240.0.0.0/4</td><td>Reserved</td><td>Reserved space; not ordinary globally routable unicast.</td></tr>
+</tbody></table></div>
+<p class="note"><b>Classic private IPv4:</b> 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16.</p></section>
+
+<section class="card"><h2>Subnet Mask & CIDR Quick Reference</h2><div class="table"><table><tr><th>CIDR</th><th>Subnet Mask</th><th>Total</th><th>Usable*</th></tr>
+<tr><td>/24</td><td>255.255.255.0</td><td>256</td><td>254</td></tr><tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>126</td></tr><tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>62</td></tr><tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>30</td></tr><tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>14</td></tr><tr><td>/29</td><td>255.255.255.248</td><td>8</td><td>6</td></tr><tr><td>/30</td><td>255.255.255.252</td><td>4</td><td>2</td></tr></table></div>
+<p>*Traditional IPv4 host calculation. /31 and /32 have special uses.</p></section>
+
+<section class="card"><h2>Related Zee Links Tools</h2><ul><li><a href="../bandwidth-calculator/index.html">CCTV Bandwidth Calculator</a></li><li><a href="../poe-calculator/index.html">PoE Calculator</a></li><li><a href="../storage-calculator/index.html">CCTV Storage Calculator</a></li><li><a href="../../knowledge/cctv-ip-subnetting/index.html">CCTV IP Subnetting Guide</a></li><li><a href="../../knowledge/vlan-for-cctv/index.html">VLAN for CCTV Guide</a></li></ul></section>
+</main>
+<script>
+const c=document.getElementById('cidr'),m=document.getElementById('mask'),ip=document.getElementById('ip'),out=document.getElementById('out'),err=document.getElementById('err');
+for(let i=0;i<=32;i++){let o=document.createElement('option');o.value=i;o.textContent='/'+i;c.appendChild(o)} c.value=24;
+function n(s){let a=s.trim().split('.');if(a.length!=4||a.some(x=>!/^\d+$/.test(x)||+x>255))throw Error('Enter a valid IPv4 address or subnet mask.');return (((+a[0])*256+ +a[1])*256+ +a[2])*256+ +a[3]}
+function ipx(x){return [Math.floor(x/16777216)%256,Math.floor(x/65536)%256,Math.floor(x/256)%256,x%256].join('.')}
+function pm(p){return p==0?'0.0.0.0':ipx((0xffffffff<<(32-p))>>>0)}
+function mp(s){let x=n(s)>>>0,p=0,z=false;for(let i=31;i>=0;i--){if((x>>>i)&1){if(z)throw Error('Subnet mask is not contiguous.');p++}else z=true}return p}
+function type(x){let a=x>>>24,b=x>>>16&255,d=x>>>8&255;
+if(a==0)return 'Special use — 0.0.0.0/8';if(a==10)return 'Private — 10.0.0.0/8';if(a==100&&b>=64&&b<=127)return 'Shared/CGNAT — 100.64.0.0/10';if(a==127)return 'Loopback — 127.0.0.0/8';if(a==169&&b==254)return 'Link-local — 169.254.0.0/16';if(a==172&&b>=16&&b<=31)return 'Private — 172.16.0.0/12';if(a==192&&b==0&&d==0)return 'Special purpose — 192.0.0.0/24';if(a==192&&b==0&&d==2)return 'Documentation — TEST-NET-1';if(a==192&&b==168)return 'Private — 192.168.0.0/16';if(a==198&&(b==18||b==19))return 'Benchmark — 198.18.0.0/15';if(a==198&&b==51&&d==100)return 'Documentation — TEST-NET-2';if(a==203&&b==0&&d==113)return 'Documentation — TEST-NET-3';if(a>=224&&a<=239)return 'Multicast — 224.0.0.0/4';if(a>=240)return 'Reserved — 240.0.0.0/4';return 'Public/global-unicast candidate'}
+function calc(){err.textContent='';try{let x=n(ip.value)>>>0,p=Number(c.value);if(m.value.trim()){p=mp(m.value);c.value=p}let mask=n(pm(p))>>>0,net=(x&mask)>>>0,total=2**(32-p),bc=(net+total-1)>>>0,first=net+1,last=bc-1,hosts=Math.max(total-2,0);if(p==31){first=net;last=bc;hosts=2}if(p==32){first=net;last=net;hosts=1}let rows=[['IP Address',ip.value],['CIDR','/'+p],['Subnet Mask',pm(p)],['Wildcard Mask',ipx((~mask)>>>0)],['Network Address',ipx(net)],['First Usable Host',ipx(first)],['Last Usable Host',ipx(last)],['Broadcast Address',ipx(bc)],['Total Addresses',total.toLocaleString()],['Usable Hosts',hosts.toLocaleString()],['Address Type',type(x)]];out.innerHTML=rows.map(r=>'<div class="result"><small>'+r[0]+'</small><b>'+r[1]+'</b></div>').join('')}catch(e){err.textContent=e.message}}
+m.oninput=()=>{try{c.value=mp(m.value)}catch(e){}};c.onchange=()=>m.value=pm(+c.value);document.getElementById('go').onclick=calc;calc();
+</script></body></html>

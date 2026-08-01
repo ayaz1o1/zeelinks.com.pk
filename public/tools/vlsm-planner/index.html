@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VLSM & Subnet Planner | IPv4 Network Planning Tool | Zee Links</title>
+<meta name="description" content="Plan IPv4 subnets using VLSM. Enter a base network and host requirements to calculate subnet, CIDR, mask, usable hosts, ranges and broadcast addresses.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zeelinks.com.pk/tools/vlsm-planner/">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+.wrap{max-width:1150px;margin:35px auto;padding:0 18px}.card{background:#fff;padding:24px;margin:18px 0;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+label{font-weight:700;display:block;margin-bottom:6px}input,select,button{width:100%;padding:11px;border:1px solid #ccd2d8;border-radius:8px;box-sizing:border-box;font:inherit}button{cursor:pointer;font-weight:700}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.req-row{display:grid;grid-template-columns:1fr 150px 45px;gap:8px;margin:8px 0}.req-row button{padding:5px}
+.table{overflow:auto}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:9px;text-align:left;vertical-align:top}th{font-weight:700}
+.note{padding:13px;background:#f5f6f7;border-left:4px solid #555;margin:14px 0}.error{font-weight:700;margin-top:10px}.success{margin-top:15px;font-weight:700}
+@media(max-width:600px){.req-row{grid-template-columns:1fr 110px 42px}.actions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header"><div class="container">
+<a href="../../index.html" class="logo"><img src="../../assets/logo/logo.png" alt="Zee Links Logo"><div class="logo-text"><h2>Zee Links</h2><span>Connecting Technology. Securing Tomorrow.</span></div></a>
+<nav class="navbar"><ul><li><a href="../../index.html">Home</a></li><li><a href="../../knowledge/index.html">Knowledge</a></li><li><a href="../index.html">Tools</a></li><li><a href="../../products.html">Products</a></li></ul></nav>
+</div></header>
+
+<main class="wrap">
+<section class="card">
+<span class="section-tag">Networking Tool · Phase 4B</span>
+<h1>VLSM & Subnet Planner</h1>
+<p>Plan multiple IPv4 subnets from one parent network. Enter the required host count for each department, VLAN, CCTV group or site segment and Zee Links will allocate appropriately sized subnets from largest requirement to smallest.</p>
+
+<div class="grid">
+<div><label for="network">Base Network</label><input id="network" value="172.16.0.0/24" placeholder="172.16.0.0/24"></div>
+<div><label for="mode">Host calculation</label><select id="mode"><option value="traditional">Traditional subnets (network + broadcast reserved)</option><option value="point">Point-to-point aware (/31 allowed)</option></select></div>
+</div>
+
+<h2>Subnet Requirements</h2>
+<div id="reqs"></div>
+<div class="actions"><button id="add">+ Add Requirement</button><button id="calc">Plan Subnets</button></div>
+<div id="err" class="error"></div>
+<div id="status" class="success"></div>
+</section>
+
+<section class="card" id="resultsCard" hidden>
+<h2>VLSM Allocation</h2>
+<div class="table"><table><thead><tr>
+<th>Requirement</th><th>Hosts Requested</th><th>Network</th><th>CIDR</th><th>Subnet Mask</th><th>Usable Hosts</th><th>First Host</th><th>Last Host</th><th>Broadcast</th>
+</tr></thead><tbody id="results"></tbody></table></div>
+</section>
+
+<section class="card">
+<h2>How VLSM Works</h2>
+<p><strong>VLSM — Variable Length Subnet Masking</strong> lets you divide one address block into subnets of different sizes. Instead of giving every department the same number of addresses, each group receives a subnet sized for its actual requirement.</p>
+<div class="note"><strong>Example:</strong> If CCTV needs 60 hosts, office PCs need 30, Wi-Fi needs 20 and management needs 10, using VLSM avoids wasting a full /24 for every group.</div>
+<h3>Planning method</h3>
+<ol>
+<li>Choose the parent network.</li>
+<li>List required hosts for each segment.</li>
+<li>Sort requirements from largest to smallest.</li>
+<li>Allocate the smallest suitable subnet for each requirement.</li>
+<li>Verify that every allocated subnet stays inside the parent network and does not overlap.</li>
+</ol>
+<h3>Important practical points</h3>
+<ul>
+<li>Traditional IPv4 LAN subnets reserve the network and broadcast addresses, so usable hosts are normally total addresses minus two.</li>
+<li>A /31 can be used for suitable point-to-point links under RFC 3021 and does not provide the usual network/broadcast host model.</li>
+<li>A /32 represents a single IPv4 address and is commonly used for host routes rather than a normal LAN subnet.</li>
+<li>VLSM is an addressing technique; it does not itself create VLANs, routing or DHCP scopes.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>CCTV / Network Example</h2>
+<div class="table"><table><thead><tr><th>Segment</th><th>Hosts</th><th>Possible subnet</th></tr></thead><tbody>
+<tr><td>CCTV Cameras</td><td>60</td><td>/26 · 62 usable hosts</td></tr>
+<tr><td>Office PCs</td><td>30</td><td>/27 · 30 usable hosts</td></tr>
+<tr><td>Wi-Fi</td><td>20</td><td>/27 · 30 usable hosts</td></tr>
+<tr><td>Management</td><td>10</td><td>/28 · 14 usable hosts</td></tr>
+</tbody></table></div>
+<p>This kind of planning is useful when designing CCTV VLANs, office networks, wireless networks and management networks inside a larger address block.</p>
+</section>
+
+<section class="card">
+<h2>Related Zee Links Tools</h2>
+<ul>
+<li><a href="../ip-calculator/index.html">IPv4 Subnet & IP Address Calculator</a></li>
+<li><a href="../bandwidth-calculator/index.html">CCTV Bandwidth Calculator</a></li>
+<li><a href="../poe-calculator/index.html">PoE Calculator</a></li>
+<li><a href="../storage-calculator/index.html">CCTV Storage Calculator</a></li>
+<li><a href="../../knowledge/cctv-ip-subnetting/index.html">CCTV IP Subnetting Guide</a></li>
+<li><a href="../../knowledge/vlan-for-cctv/index.html">VLAN for CCTV Guide</a></li>
+</ul>
+</section>
+</main>
+
+<script>
+const reqs=document.getElementById('reqs'), err=document.getElementById('err'), status=document.getElementById('status');
+function addReq(name='',hosts=''){
+ const row=document.createElement('div'); row.className='req-row';
+ row.innerHTML='<input class="rname" placeholder="Segment name" value="'+name.replace(/"/g,'&quot;')+'"><input class="rhosts" type="number" min="1" step="1" placeholder="Hosts" value="'+hosts+'"><button type="button" title="Remove">×</button>';
+ row.querySelector('button').onclick=()=>row.remove(); reqs.appendChild(row);
+}
+addReq('CCTV Cameras',60); addReq('Office PCs',30); addReq('Wi-Fi',20); addReq('Management',10);
+document.getElementById('add').onclick=()=>addReq();
+
+function ipToInt(s){
+ const a=s.trim().split('.');
+ if(a.length!==4||a.some(x=>!/^\d+$/.test(x)||+x>255)) throw Error('Enter a valid IPv4 network address.');
+ return (((+a[0])*256+ +a[1])*256+ +a[2])*256+ +a[3];
+}
+function intToIp(n){return [Math.floor(n/16777216)%256,Math.floor(n/65536)%256,Math.floor(n/256)%256,n%256].join('.')}
+function mask(p){return p===0?'0.0.0.0':intToIp((0xffffffff<<(32-p))>>>0)}
+function prefixForHosts(h,mode){
+ if(h<1) throw Error('Host requirement must be at least 1.');
+ if(mode==='point' && h===2) return 31;
+ let p=32;
+ while(p>0){
+   const total=2**(32-p);
+   const usable=total-2;
+   if(usable>=h) return p;
+   p--;
+ }
+ throw Error('Host requirement is too large for IPv4.');
+}
+function parseBase(s){
+ const parts=s.trim().split('/');
+ if(parts.length!==2||!/^\d+$/.test(parts[1])) throw Error('Base network must look like 172.16.0.0/24.');
+ const p=+parts[1]; if(p<0||p>32) throw Error('CIDR prefix must be between /0 and /32.');
+ const x=ipToInt(parts[0])>>>0; const m=p===0?0:(0xffffffff<<(32-p))>>>0; const net=(x&m)>>>0;
+ if(x!==net) throw Error('Base address is not the network address for that CIDR. Use '+intToIp(net)+'/'+p+'.');
+ return {net,p,size:2**(32-p)};
+}
+function calc(){
+ err.textContent=''; status.textContent=''; document.getElementById('resultsCard').hidden=true;
+ try{
+  const base=parseBase(document.getElementById('network').value);
+  const mode=document.getElementById('mode').value;
+  const rows=[...document.querySelectorAll('.req-row')].map((r,i)=>({name:r.querySelector('.rname').value.trim()||('Subnet '+(i+1)),hosts:+r.querySelector('.rhosts').value})).filter(x=>x.hosts);
+  if(!rows.length) throw Error('Add at least one subnet requirement.');
+  rows.forEach(x=>{if(!Number.isInteger(x.hosts)||x.hosts<1)throw Error('Host requirements must be whole numbers greater than zero.')});
+  rows.sort((a,b)=>b.hosts-a.hosts);
+  let cursor=base.net, end=base.net+base.size-1, allocations=[];
+  for(const r of rows){
+   const p=prefixForHosts(r.hosts,mode), size=2**(32-p);
+   cursor=Math.ceil(cursor/size)*size;
+   if(cursor+size-1>end) throw Error('The requested subnets do not fit inside '+intToIp(base.net)+'/'+base.p+'.');
+   const net=cursor, bc=cursor+size-1;
+   let first=net+1,last=bc-1,usable=size-2;
+   if(p===31){first=net;last=bc;usable=2}
+   if(p===32){first=net;last=net;usable=1}
+   allocations.push({...r,p,size,net,bc,first,last,usable});
+   cursor+=size;
+  }
+  document.getElementById('results').innerHTML=allocations.map(a=>'<tr>'+
+   '<td>'+esc(a.name)+'</td><td>'+a.hosts.toLocaleString()+'</td><td>'+intToIp(a.net)+'</td><td>/'+a.p+'</td><td>'+mask(a.p)+'</td>'+
+   '<td>'+a.usable.toLocaleString()+'</td><td>'+intToIp(a.first)+'</td><td>'+intToIp(a.last)+'</td><td>'+intToIp(a.bc)+'</td></tr>').join('');
+  document.getElementById('resultsCard').hidden=false;
+  const remaining=end-(cursor-1);
+  status.textContent='Plan created. '+allocations.length+' subnet(s) allocated; '+Math.max(remaining,0).toLocaleString()+' address(es) remain unused in the parent block.';
+ }catch(e){err.textContent=e.message}
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.getElementById('calc').onclick=calc;
+</script>
+</body>
+</html>

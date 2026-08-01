@@ -1,12 +1,4 @@
-# ZeeLinks Portal v1.0
-# Search Engine Instructions
-
 User-agent: *
-
 Allow: /
 
-Disallow: /admin/
-Disallow: /private/
-Disallow: /config/
-
-Sitemap: https://www.zeelinks.com.pk/sitemap.xml
+Sitemap: https://zeelinks.com.pk/sitemap.xml

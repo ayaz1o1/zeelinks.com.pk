@@ -1,0 +1,21 @@
+
+.tool-page{min-height:100vh;background:#f4f7fb}
+.tool-hero{padding:150px 0 60px;background:linear-gradient(135deg,#020617,#1e3a8a);color:#fff}
+.tool-hero h1{font-family:Poppins,sans-serif;font-size:46px;margin:12px 0}
+.tool-hero p{max-width:760px;color:#dbeafe}
+.tool-wrap{max-width:900px;margin:-20px auto 80px;position:relative}
+.tool-panel{background:#fff;border:1px solid var(--border);border-radius:20px;padding:35px;box-shadow:var(--shadow)}
+.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.tool-field{display:flex;flex-direction:column;gap:8px}
+.tool-field.full{grid-column:1/-1}
+.tool-field label{font-weight:600}
+.tool-field input,.tool-field select,.tool-field textarea{width:100%;padding:13px 15px;border:1px solid var(--border);border-radius:10px;font:inherit}
+.tool-result{margin-top:25px;padding:22px;border-radius:14px;background:#eff6ff;border:1px solid #bfdbfe}
+.tool-result strong{color:#1d4ed8}
+.tool-note{margin-top:15px;color:#64748b;font-size:.94rem}
+.tool-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.result-table{width:100%;border-collapse:collapse;margin-top:10px}
+.result-table td{padding:9px;border-bottom:1px solid #dbeafe}
+@media(max-width:700px){.tool-grid{grid-template-columns:1fr}.tool-field.full{grid-column:auto}.tool-panel{padding:22px}.tool-hero h1{font-size:34px}}
+
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.result-box{padding:14px;border-radius:10px;background:#fff;border:1px solid #dbeafe}.result-box small{display:block;color:#64748b;margin-bottom:5px}.result-box strong{font-size:18px;color:#0f172a}.result-warn{margin-top:14px;padding:12px 14px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}.result-ok{margin-top:14px;padding:12px 14px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}.formula-note{margin-top:14px;padding:13px 15px;border-left:3px solid #2563eb;background:#f8fafc;color:#475569;font-size:.92rem;line-height:1.6}@media(max-width:700px){.result-grid{grid-template-columns:1fr}}

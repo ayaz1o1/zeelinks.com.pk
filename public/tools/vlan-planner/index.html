@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VLAN Planner | Network Segmentation & IP Planning Tool | Zee Links</title>
+<meta name="description" content="Plan VLAN IDs, names, purposes, IPv4 subnets, gateways, DHCP ranges and host capacity for CCTV, office, Wi-Fi and management networks.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zeelinks.com.pk/tools/vlan-planner/">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+.wrap{max-width:1180px;margin:35px auto;padding:0 18px}.card{background:#fff;padding:24px;margin:18px 0;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}label{font-weight:700;display:block;margin-bottom:6px}
+input,select,button{width:100%;padding:11px;border:1px solid #ccd2d8;border-radius:8px;box-sizing:border-box;font:inherit}button{cursor:pointer;font-weight:700}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.row{display:grid;grid-template-columns:100px 1fr 150px 1.4fr 180px 45px;gap:8px;margin:8px 0}
+.table{overflow:auto}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:9px;text-align:left;vertical-align:top}th{font-weight:700}
+.note{padding:13px;background:#f5f6f7;border-left:4px solid #555;margin:14px 0}.error{font-weight:700;margin-top:10px}.ok{font-weight:700;margin-top:10px}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.result{padding:14px;border:1px solid #ddd;border-radius:9px}.result small{display:block;opacity:.65;margin-bottom:5px}
+@media(max-width:850px){.row{grid-template-columns:1fr 1fr}.row button{grid-column:auto}.actions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header"><div class="container">
+<a href="../../index.html" class="logo"><img src="../../assets/logo/logo.png" alt="Zee Links Logo"><div class="logo-text"><h2>Zee Links</h2><span>Connecting Technology. Securing Tomorrow.</span></div></a>
+<nav class="navbar"><ul><li><a href="../../index.html">Home</a></li><li><a href="../../knowledge/index.html">Knowledge</a></li><li><a href="../index.html">Tools</a></li><li><a href="../../products.html">Products</a></li></ul></nav>
+</div></header>
+
+<main class="wrap">
+<section class="card">
+<span class="section-tag">Networking Tool · Phase 4B-5</span>
+<h1>VLAN Planner</h1>
+<p>Design a practical VLAN and IPv4 segmentation plan for CCTV, office PCs, Wi-Fi, servers, management and other network groups. Enter each VLAN's ID, purpose and subnet to produce a clean deployment table.</p>
+
+<div class="grid">
+<div><label for="site">Site / Project Name</label><input id="site" value="Zee Links Network Plan"></div>
+<div><label for="router">Default Routing Device</label><input id="router" value="Core Router / Layer 3 Switch"></div>
+<div><label for="dns">DNS Server</label><input id="dns" value="Use site DNS / DHCP"></div>
+</div>
+
+<h2>VLAN Segments</h2>
+<div id="rows"></div>
+<div class="actions"><button id="add">+ Add VLAN</button><button id="plan">Build VLAN Plan</button></div>
+<div id="err" class="error"></div>
+<div id="ok" class="ok"></div>
+</section>
+
+<section class="card" id="outCard" hidden>
+<h2>VLAN Deployment Plan</h2>
+<p id="outIntro"></p>
+<div class="table"><table><thead><tr>
+<th>VLAN ID</th><th>Name</th><th>Purpose</th><th>Subnet</th><th>Gateway</th><th>DHCP Range</th><th>Usable Hosts</th><th>Notes</th>
+</tr></thead><tbody id="out"></tbody></table></div>
+</section>
+
+<section class="card">
+<h2>Recommended Segmentation Pattern</h2>
+<div class="table"><table><thead><tr><th>VLAN</th><th>Example name</th><th>Typical purpose</th><th>Example subnet</th></tr></thead><tbody>
+<tr><td>10</td><td>MGMT</td><td>Switches, APs, NVR management</td><td>10.10.10.0/24</td></tr>
+<tr><td>20</td><td>CCTV</td><td>IP cameras and CCTV traffic</td><td>10.10.20.0/24</td></tr>
+<tr><td>30</td><td>USERS</td><td>Office PCs and printers</td><td>10.10.30.0/24</td></tr>
+<tr><td>40</td><td>WIFI</td><td>Staff wireless clients</td><td>10.10.40.0/24</td></tr>
+<tr><td>50</td><td>GUEST</td><td>Guest / internet-only wireless</td><td>10.10.50.0/24</td></tr>
+<tr><td>60</td><td>SERVERS</td><td>Servers and infrastructure services</td><td>10.10.60.0/24</td></tr>
+</tbody></table></div>
+<p class="note"><strong>Design principle:</strong> VLANs provide Layer-2 segmentation. Communication between VLANs requires Layer-3 routing, and access should be controlled with ACLs/firewall policies as appropriate.</p>
+</section>
+
+<section class="card">
+<h2>CCTV VLAN Design Notes</h2>
+<ul>
+<li>Put cameras into a dedicated CCTV VLAN when the network design and equipment support it.</li>
+<li>Restrict camera-to-user and camera-to-internet traffic according to the actual security requirement.</li>
+<li>Keep NVR management access separate from general user access where practical.</li>
+<li>Use the VLSM Planner first when different VLANs need different subnet sizes.</li>
+<li>Document the gateway, DHCP scope, static camera range and management addresses before deployment.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Related Zee Links Tools</h2>
+<ul>
+<li><a href="../ip-calculator/index.html">IPv4 Subnet & IP Address Calculator</a></li>
+<li><a href="../ip-range-calculator/index.html">IP Range & Host Calculator</a></li>
+<li><a href="../vlsm-planner/index.html">VLSM & Subnet Planner</a></li>
+<li><a href="../wildcard-calculator/index.html">Wildcard Mask Calculator</a></li>
+<li><a href="../ipv4-binary-explorer/index.html">IPv4 Binary & Subnet Bit Explorer</a></li>
+<li><a href="../../knowledge/vlan-for-cctv/index.html">VLAN for CCTV Guide</a></li>
+</ul>
+</section>
+</main>
+
+<script>
+const rows=document.getElementById('rows'),err=document.getElementById('err'),ok=document.getElementById('ok');
+function addRow(id='',name='',purpose='',subnet='',notes=''){
+ const r=document.createElement('div');r.className='row';
+ r.innerHTML='<input class="vid" type="number" min="1" max="4094" placeholder="ID" value="'+id+'">'+
+ '<input class="vname" placeholder="VLAN name" value="'+escAttr(name)+'">'+
+ '<input class="vpurpose" placeholder="Purpose" value="'+escAttr(purpose)+'">'+
+ '<input class="vsubnet" placeholder="192.168.10.0/24" value="'+escAttr(subnet)+'">'+
+ '<input class="vnotes" placeholder="Optional notes" value="'+escAttr(notes)+'">'+
+ '<button type="button" title="Remove">×</button>';
+ r.querySelector('button').onclick=()=>r.remove();rows.appendChild(r);
+}
+function escAttr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+addRow(10,'MGMT','Network management','10.10.10.0/24','Switches, APs, NVR management');
+addRow(20,'CCTV','IP cameras','10.10.20.0/24','Camera traffic');
+addRow(30,'USERS','Office clients','10.10.30.0/24','PCs and printers');
+addRow(40,'WIFI','Staff Wi-Fi','10.10.40.0/24','Wireless clients');
+addRow(50,'GUEST','Guest Wi-Fi','10.10.50.0/24','Internet-only policy recommended');
+
+function ipInt(s){let a=s.split('.');if(a.length!==4||a.some(x=>!/^\d+$/.test(x)||+x>255))throw Error('Invalid IPv4 address: '+s);return (((+a[0])*256+ +a[1])*256+ +a[2])*256+ +a[3]}
+function ipStr(x){return [Math.floor(x/16777216)%256,Math.floor(x/65536)%256,Math.floor(x/256)%256,x%256].join('.')}
+function prefix(s){let p=+s;if(p<0||p>32||!Number.isInteger(p))throw Error('Invalid CIDR prefix.');return p}
+function parse(s){
+ let q=s.trim().split('/');if(q.length!==2)throw Error('Use subnet notation such as 10.10.20.0/24.');
+ let p=prefix(q[1]),x=ipInt(q[0])>>>0,m=p===0?0:(0xffffffff<<(32-p))>>>0,n=(x&m)>>>0;
+ if(n!==x)throw Error('Subnet '+s+' is not a network address. Use '+ipStr(n)+'/'+p+'.');
+ return {n,p,size:2**(32-p),bc:n+2**(32-p)-1};
+}
+function overlap(a,b){return a.n<=b.bc&&b.n<=a.bc}
+function plan(){
+ err.textContent='';ok.textContent='';document.getElementById('outCard').hidden=true;
+ try{
+  const data=[...document.querySelectorAll('.row')].map((r,i)=>({
+   id:+r.querySelector('.vid').value,name:r.querySelector('.vname').value.trim()||('VLAN '+(i+1)),
+   purpose:r.querySelector('.vpurpose').value.trim(),subnet:r.querySelector('.vsubnet').value.trim(),notes:r.querySelector('.vnotes').value.trim()
+  }));
+  if(!data.length)throw Error('Add at least one VLAN.');
+  const ids=new Set();
+  data.forEach(x=>{if(!Number.isInteger(x.id)||x.id<1||x.id>4094)throw Error('VLAN IDs must be between 1 and 4094.');if(ids.has(x.id))throw Error('Duplicate VLAN ID: '+x.id);ids.add(x.id);x.net=parse(x.subnet);});
+  for(let i=0;i<data.length;i++)for(let j=i+1;j<data.length;j++)if(overlap(data[i].net,data[j].net))throw Error('Overlapping subnets: '+data[i].subnet+' and '+data[j].subnet);
+  const html=data.sort((a,b)=>a.id-b.id).map(x=>{
+   const first=x.net.p===31?x.net.n:x.net.n+1,last=x.net.p===31?x.net.bc:x.net.bc-1;
+   const usable=x.net.p===32?1:x.net.p===31?2:Math.max(x.net.size-2,0);
+   const gateway=usable?ipStr(first):ipStr(x.net.n);
+   const dhcp=usable>2?ipStr(first+1)+' – '+ipStr(last):'Not recommended';
+   return '<tr><td><strong>'+x.id+'</strong></td><td>'+esc(x.name)+'</td><td>'+esc(x.purpose||'—')+'</td><td>'+ipStr(x.net.n)+'/'+x.net.p+'</td><td>'+gateway+'</td><td>'+dhcp+'</td><td>'+usable.toLocaleString()+'</td><td>'+esc(x.notes||'—')+'</td></tr>';
+  }).join('');
+  document.getElementById('out').innerHTML=html;
+  document.getElementById('outIntro').textContent=document.getElementById('site').value+' · Routing device: '+document.getElementById('router').value+' · DNS: '+document.getElementById('dns').value;
+  document.getElementById('outCard').hidden=false;
+  ok.textContent='VLAN plan created. IDs are unique and the IPv4 subnets do not overlap.';
+ }catch(e){err.textContent=e.message}
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.getElementById('add').onclick=()=>addRow();
+document.getElementById('plan').onclick=plan;
+</script>
+</body>
+</html>

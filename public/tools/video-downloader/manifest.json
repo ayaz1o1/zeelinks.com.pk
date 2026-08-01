@@ -1,13 +1,13 @@
 {
-  "name": "Zee Links | CCTV, Networking & IT Solutions",
-  "short_name": "Zee Links",
+  "name": "Zee Links Video Downloader",
+  "short_name": "Zee Downloader",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#020617",
   "theme_color": "#2563eb",
+  "background_color": "#0b1120",
   "icons": [
     {
-      "src": "assets/logo/favicon.png",
+      "src": "../../assets/logo/favicon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
