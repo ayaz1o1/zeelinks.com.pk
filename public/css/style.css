@@ -2409,12 +2409,12 @@ ul{
 
 }
 /*==================================================
-  MOBILE PRODUCT IMAGE FIX
+  MOBILE PORTFOLIO IMAGE FIX
 ==================================================*/
 
 @media (max-width: 768px) {
 
-    .product-card img {
+    .portfolio-card img {
         width: 100%;
         height: auto !important;
         object-fit: contain;
