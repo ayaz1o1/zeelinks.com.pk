@@ -2364,22 +2364,6 @@ ul{
 
 
 }
-/*==================================================
-  MOBILE PRODUCT IMAGE FIX
-==================================================*/
-
-@media (max-width: 768px) {
-
-    .product-card img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        object-position: center;
-        display: block;
-    }
-
-}
-
 
 /*==================================================
   MOBILE EXPERIENCE BOX FIX
@@ -2408,12 +2392,14 @@ ul{
     }
 
 }
+
 /*==================================================
-  MOBILE PORTFOLIO IMAGE FIX
+  MOBILE SVG IMAGE FIX
 ==================================================*/
 
 @media (max-width: 768px) {
 
+    .product-card img,
     .portfolio-card img {
         width: 100%;
         height: auto !important;
