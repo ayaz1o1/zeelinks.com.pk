@@ -2408,3 +2408,18 @@ ul{
     }
 
 }
+/*==================================================
+  MOBILE PRODUCT IMAGE FIX
+==================================================*/
+
+@media (max-width: 768px) {
+
+    .product-card img {
+        width: 100%;
+        height: auto !important;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+    }
+
+}
