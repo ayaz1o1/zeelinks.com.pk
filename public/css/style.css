@@ -2364,3 +2364,47 @@ ul{
 
 
 }
+/*==================================================
+  MOBILE PRODUCT IMAGE FIX
+==================================================*/
+
+@media (max-width: 768px) {
+
+    .product-card img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+    }
+
+}
+
+
+/*==================================================
+  MOBILE EXPERIENCE BOX FIX
+==================================================*/
+
+@media (max-width: 768px) {
+
+    .experience-box {
+        width: 110px;
+        min-width: 0;
+        padding: 10px;
+        bottom: 12px;
+        right: 12px;
+        box-sizing: border-box;
+    }
+
+    .experience-box h2 {
+        font-size: 30px;
+        line-height: 1;
+        margin-bottom: 5px;
+    }
+
+    .experience-box span {
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+}
