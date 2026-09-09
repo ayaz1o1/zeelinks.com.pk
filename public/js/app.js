@@ -1,3 +1,4 @@
+document.documentElement.classList.add("js-enabled");
 /*==================================================
     Zee Links Enterprise Platform
     Main JavaScript
