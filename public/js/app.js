@@ -48,7 +48,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 const revealElements = document.querySelectorAll(
     ".section-heading,.service-card,.product-card,.tool-card,.knowledge-card," +
-    ".portfolio-card,.testimonial-card,.about-item,.why-card"
+    ".portfolio-card,.testimonial-card,.about-item,.why-card,.ai-card," +
+    ".industry-card,.step-card"
 );
 
 const revealOnScroll = () => {
